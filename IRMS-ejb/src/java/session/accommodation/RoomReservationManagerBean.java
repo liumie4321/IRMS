@@ -28,7 +28,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author nirvana
+ * @author nirvana asdasdasdasdas
  */
 @Stateless
 public class RoomReservationManagerBean implements RoomReservationManagerBeanLocal {
@@ -45,7 +45,7 @@ public class RoomReservationManagerBean implements RoomReservationManagerBeanLoc
 
     @Override
     public ArrayList searchRoom(Date checkinDate, Date checkoutDate) {
-        //search all available rooms in all hotels based on checkin checkout date
+        //search all available rooms in all hotels based on checkin checkout date。
         ArrayList stateList = new ArrayList();
         this.checkinDate = checkinDate;
         this.checkoutDate = checkoutDate;
@@ -87,7 +87,7 @@ public class RoomReservationManagerBean implements RoomReservationManagerBeanLoc
 
         for (Object o4 : availableRooms) {
             RoomEntity r = (RoomEntity) o4;
-            System.out.println("room reservation managerbean 82 r id is " + r.getRoomId());
+            System.out.println("room reservation managerbean 82 room id is " + r.getRoomId());
             double rate = 0;
             try {
                 rate = this.checkRate(r);
