@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Integrated Resort Management System</title>
+    </h:head>
+    <h:body><h:form>
+         <p:panel id="panel" header="Personal Profile">             
+            
+               
+                <h:panelGrid columns="3" cellpadding="5">
+<!--                     
+                <h:outputLabel for="name" value="Name:     "/>
+                <h:inputText id="name" value="" />
+                <h:outputText id="out1" value="" />
+-->                
+                
+                <h:outputLabel for="firstName" value="First Name:     "/>
+                <h:inputText id="firstName" value="#{clientProfileMB.firstName}" />
+                <h:outputText id="out1" value="" />
+                
+                <h:outputLabel for="lastName" value="Last Name:     "/>
+                <h:inputText id="lastName" value="#{clientProfileMB.lastName}" />
+                <h:outputText id="out2" value="" />
+                 
+<!--                 
+                <h:outputLabel for="phone" value="Phone Number: "/>  
+                <h:inputText id="phone" value=""/>
+                <h:outputText id="out3" value="" />
+-->                
+                </h:panelGrid>
+                <br></br>
+                <br></br>
+                <p:commandButton  action="#{clientProfileMB.edit()}" value="update" />          
+            
+        </p:panel></h:form>
+    </h:body>
+</html>

@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Personal Profile</title>
+    </h:head>
+    <h:body>
+        <p:panel id="panel" header="Personal Profile" >
+        Membership ID:
+        <h:outputText value="#{clientProfileMB.displayMemID()}"/>
+        <br></br>
+        First Name   :
+        <h:outputText value="#{clientProfileMB.displayUserFirstName()}"/>
+        <br></br>
+        Last Name    :
+        <h:outputText value="#{clientProfileMB.displayUserLastName()}"/>
+        <br></br>
+        Email Address:
+        <h:outputText value="#{clientProfileMB.displayEmail()}"/>
+        <br></br>
+        <br></br>
+        <h:button value="Update personal information" outcome="updateCusInfor"/>
+        </p:panel>
+    </h:body>    
+</html>
