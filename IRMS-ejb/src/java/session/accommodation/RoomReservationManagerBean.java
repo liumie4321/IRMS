@@ -31,8 +31,8 @@ import java.util.logging.Logger;
  * @author nirvana
  */
 @Stateless
-public class RoomReservationManagerBean implements RoomReservationManagerBeanLocal{
- 
+public class RoomReservationManagerBean implements RoomReservationManagerBeanLocal {
+
     @PersistenceContext
     EntityManager em;
     private Date checkinDate;
@@ -53,41 +53,41 @@ public class RoomReservationManagerBean implements RoomReservationManagerBeanLoc
         Query q1 = em.createQuery("SELECT a FROM Hotel a");
         for (Object o1 : q1.getResultList()) {
             HotelEntity a1 = (HotelEntity) o1;
-            System.out.println("a1 name is "+a1.getName());
+            System.out.println("a1 name is " + a1.getName());
             Collection<RoomEntity> temp1 = new ArrayList<RoomEntity>();
             temp1 = a1.getRooms();
             for (Object o2 : temp1) {
                 RoomEntity a2 = (RoomEntity) o2;
-                System.out.println("a2 name is "+a2.getRoomId());
+                System.out.println("a2 name is " + a2.getRoomId());
                 Collection<RoomReservationEntity> temp2 = new ArrayList<RoomReservationEntity>();
-                 temp2 = a2.getReservations();
-                 System.out.println("room reservation manager bean 64");
-                 if(temp2.isEmpty()){
-                     availableRooms.add(a2);
-                     System.out.println("room reservation manager bean 67");
-                 }else{
-                     System.out.println("room reservation manager bean 69");
-                int counter = 0;
-                for (Object o3 : temp2) {
-                    RoomReservationEntity a3 = (RoomReservationEntity) o3;
-                    System.out.println("room reservation managerbean 67 a3 type is "+a3.getType());
-                  
-                    if (checkoutDate.before(a3.getCheckinDate()) || checkinDate.after(a3.getCheckoutDate())) {
-                        counter++;
+                temp2 = a2.getReservations();
+                System.out.println("room reservation manager bean 64");
+                if (temp2.isEmpty()) {
+                    availableRooms.add(a2);
+                    System.out.println("room has no reservation. manager bean 67");
+                } else {
+                    System.out.println("manager bean 69. room has reservation. number of reservation is "+temp2.size());
+                    int counter = 0;
+                    for (Object o3 : temp2) {
+                        RoomReservationEntity a3 = (RoomReservationEntity) o3;
+                        System.out.println("room reservation managerbean 67 reservation ID is " + a3.getRoomReservId());
+
+                        if (checkoutDate.before(a3.getCheckinDate()) || checkinDate.after(a3.getCheckoutDate())) {
+                            counter++;
+                        }
+                        if (counter == temp2.size()) {
+                            availableRooms.add(a2);
+                        }
+
                     }
-                    if (counter == temp2.size()) {
-                        availableRooms.add(a2);
-                    }
-                  
                 }
-            }
-                 System.out.println("room reservation manager bean 84");
+                System.out.println("room reservation manager bean 84");
             }
         }
 
         for (Object o4 : availableRooms) {
             RoomEntity r = (RoomEntity) o4;
-           System.out.println("room reservation managerbean 82 r id is "+r.getRoomId());
+            System.out.println("room reservation managerbean 82 r id is " + r.getRoomId());
             double rate = 0;
             try {
                 rate = this.checkRate(r);
@@ -96,16 +96,16 @@ public class RoomReservationManagerBean implements RoomReservationManagerBeanLoc
             }
 
             Collection<String> roomItems = new ArrayList();
-            Collection<RoomItemEntity> ris =new ArrayList<RoomItemEntity>();
-                    ris= r.getRoomType().getRoomItems();
+            Collection<RoomItemEntity> ris = new ArrayList<RoomItemEntity>();
+            ris = r.getRoomType().getRoomItems();
             for (Object o5 : ris) {
                 RoomItemEntity ri = (RoomItemEntity) o5;
                 roomItems.add(ri.getName());
             }
 
             Collection<String> roomServices = new ArrayList<String>();
-            Collection<RoomServiceEntity> rss =new ArrayList<RoomServiceEntity>();
-                    rss= r.getHotel().getRoomServices();
+            Collection<RoomServiceEntity> rss = new ArrayList<RoomServiceEntity>();
+            rss = r.getHotel().getRoomServices();
             for (Object o6 : rss) {
                 RoomServiceEntity rs = (RoomServiceEntity) o6;
                 roomServices.add(rs.getName());
@@ -142,8 +142,8 @@ public class RoomReservationManagerBean implements RoomReservationManagerBeanLoc
         temp.setTime(checkinDate);
 
         RoomEntity room = em.find(RoomEntity.class, r.getRoomId());
-        Collection<RatePlanEntity> plans=new ArrayList<RatePlanEntity>();
-                plans =room.getRoomType().getRatePlans();
+        Collection<RatePlanEntity> plans = new ArrayList<RatePlanEntity>();
+        plans = room.getRoomType().getRatePlans();
         for (Object o : plans) {
             RatePlanEntity rateplanEntity = (RatePlanEntity) o;
             if (rateplanEntity.getDescription().equals("DEFAULT")) {
